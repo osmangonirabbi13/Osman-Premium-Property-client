@@ -38,7 +38,7 @@ const Navbar = () => {
             <label tabIndex={0} className="btn btn-ghost text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
+                className="h-6 w-6 md:h-8 md:w-8"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -60,15 +60,15 @@ const Navbar = () => {
           </div>
 
           {/* Logo */}
-          <Link to="/" className="btn btn-ghost normal-case text-xl">
-            <img src={logo} alt="Logo" className="h-8" />
+          <Link to="/" className=" normal-case text-xl">
+            <img src={logo} alt="Logo" className="h-10 md:h-14" />
           </Link>
         </div>
 
         {/* Desktop: Logo */}
         <div className="flex-none hidden lg:flex">
-          <Link to="/" className="btn btn-ghost normal-case text-xl">
-            <img src={logo} alt="Logo" className="h-8" />
+          <Link to="/" className=" normal-case text-xl">
+            <img src={logo} alt="Logo" className="h-12" />
           </Link>
         </div>
 
