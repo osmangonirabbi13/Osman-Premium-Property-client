@@ -6,6 +6,7 @@ import Features from "../Features/Features";
 import Location from "../Location/Location";
 import WeProvide from "../WeProvide/WeProvide";
 import Testimonial from "../Testimonial/Testimonial";
+import Compani from "../Company/Company";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <Location />
       <WeProvide />
       <Testimonial />
+      <Compani />
     </div>
   );
 };
