@@ -6,7 +6,7 @@ import { MdOutlineBedroomChild } from "react-icons/md";
 import { GiHomeGarage } from "react-icons/gi";
 import { HiOutlineHome } from "react-icons/hi2";
 
-export default function Location() {
+const Location = () => {
   return (
     <div className="w-full pb-10 bg-[#ffefe5]">
       <div className="container mx-auto grid grid-cols-1 relative md:grid-cols-2 gap-5 md:gap-0">
@@ -53,8 +53,10 @@ export default function Location() {
             </div>
           </div>
         </div>
-        <img src={image} className="w-full pt-2 md:pt-0 lg:pt-0" alt="" />
+        <img src={image} className="w-full pt-2 md:pt-8 lg:pt-0" alt="" />
       </div>
     </div>
   );
-}
+};
+
+export default Location;

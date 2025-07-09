@@ -4,6 +4,7 @@ import WelcomeHome from "../WelcomeHome/WelcomeHome";
 import ProjectOverview from "../ProjectOverview/ProjectOverview";
 import Features from "../Features/Features";
 import Location from "../Location/Location";
+import WeProvide from "../WeProvide/WeProvide";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <ProjectOverview />
       <Features />
       <Location />
+      <WeProvide />
     </div>
   );
 };
