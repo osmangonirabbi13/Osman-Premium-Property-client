@@ -34,10 +34,10 @@ const ProjectOverview = () => {
   return (
     <div
       ref={sectionRef}
-      className="w-full min-h-screen overflow-hidden flex justify-center flex-col items-center p-2 md:p-5 xl:p-10 py-10 relative bg-[#ffefe5]"
+      className="w-full overflow-hidden flex  flex-col items-center p-2 md:p-5 xl:p-10 py-10 relative bg-[#ffefe5]"
     >
       <div className="w-full z-10 flex flex-col justify-center items-center">
-        <h3 className="text-xl uppercase text-[#312720] font-bold">
+        <h3 className="text-3xl uppercase text-[#312720] font-bold ">
           building overView
         </h3>
         <img src={design} alt="design" className="w-[250px]" />
@@ -76,7 +76,7 @@ const ProjectOverview = () => {
         ))}
       </div>
 
-      <h1 className="md:text-[13vw] text-[100px] transform rotate-90 sm:rotate-0 absolute font-bold uppercase text-[#ffe0ce]">
+      <h1 className="md:text-[12vw] text-[100px] transform rotate-90 sm:rotate-0  md:pt-40 lg:pt-0 absolute font-bold uppercase text-[#ffe0ce]">
         building <br />
         <span className="ml-0 sm:ml-[100px]">Overview</span>
       </h1>

@@ -83,13 +83,17 @@ export default function WelcomeHome() {
       {/* ----------------Section container------------------- */}
       <div className="w-full flex p-3 sm:p-5 md:p-10 justify-center overflow-hidden items-center bg-[#2c241e] relative min-h-screen">
         <div className="w-full md:min-w-[66%] h-full absolute top-0">
-          <img src={bgimg} alt="" className=" bottom-0 absolute left-0" />
+          <img
+            src={bgimg}
+            alt=""
+            className=" bottom-0 absolute left-0 object-cover"
+          />
         </div>
         <div className="hidden md:block md:w-[33.34%] h-full z-0 absolute top-0 right-0">
           <img
             src={leftimg}
             alt=""
-            className="h-full w-full absolute left-0 top-0"
+            className="h-full w-full absolute left-0 top-0 object-cover"
           />
         </div>
         {/* ----------------------contamtDiv------------------ */}
