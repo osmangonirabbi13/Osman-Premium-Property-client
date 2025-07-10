@@ -25,6 +25,14 @@ const Navbar = () => {
           CONTACT
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className="font-bold text-white uppercase"
+          to="/TermsAndConditions"
+        >
+          Terms And Conditions
+        </NavLink>
+      </li>
     </>
   );
 
