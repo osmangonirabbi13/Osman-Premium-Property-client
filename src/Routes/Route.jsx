@@ -4,6 +4,7 @@ import Home from "../Page/Home/Home/Home";
 import About from "../Page/Home/About/About";
 import TermsAndConditions from "../Page/Home/Terms/TermsAndConditions";
 import PrivacyPolicy from "../Page/Home/PrivacyPolicy/PrivacyPolicy";
+import AuthLayout from "../Layouts/AuthLayout";
 
 export const router = createBrowserRouter([
   {
@@ -27,5 +28,9 @@ export const router = createBrowserRouter([
         Component: PrivacyPolicy,
       },
     ],
+  },
+  {
+    path: "/",
+    Component: AuthLayout,
   },
 ]);
