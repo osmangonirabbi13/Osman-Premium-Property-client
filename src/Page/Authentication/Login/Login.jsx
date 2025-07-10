@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   const {
@@ -70,6 +71,7 @@ const Login = () => {
             </Link>
           </p>
         </form>
+        <SocialLogin />
       </div>
     </div>
   );

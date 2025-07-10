@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import SocialLogin from "../SocialLogin/SocialLogin";
 const Register = () => {
   const {
     register,
@@ -129,6 +130,7 @@ const Register = () => {
             </small>
           </p>
         </form>
+        <SocialLogin />
       </div>
     </div>
   );
