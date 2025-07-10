@@ -6,6 +6,7 @@ import TermsAndConditions from "../Page/Home/Terms/TermsAndConditions";
 import PrivacyPolicy from "../Page/Home/PrivacyPolicy/PrivacyPolicy";
 import AuthLayout from "../Layouts/AuthLayout";
 import Register from "../Page/Authentication/Register/Register";
+import Login from "../Page/Authentication/Login/login";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/login",
+        Component: Login,
       },
     ],
   },

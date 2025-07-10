@@ -42,7 +42,7 @@ const Testimonial = () => {
         <Swiper
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           modules={[Autoplay]}
-          loop={true}
+          loop={reviews.length > 1}
           className="w-[90%]"
         >
           {reviews.map((review) => (
