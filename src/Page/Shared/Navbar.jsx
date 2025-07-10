@@ -11,15 +11,16 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
+        <NavLink className="font-bold text-white" to="/appartment">
+          ALL APARTMENT
+        </NavLink>
+      </li>
+      <li>
         <NavLink className="font-bold text-white" to="/about">
           ABOUT
         </NavLink>
       </li>
-      <li>
-        <NavLink className="font-bold text-white" to="/appartment">
-          APARTMENT
-        </NavLink>
-      </li>
+
       <li>
         <NavLink className="font-bold text-white" to="/contact">
           CONTACT
