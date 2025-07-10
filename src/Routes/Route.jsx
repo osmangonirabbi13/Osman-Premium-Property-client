@@ -5,6 +5,7 @@ import About from "../Page/Home/About/About";
 import TermsAndConditions from "../Page/Home/Terms/TermsAndConditions";
 import PrivacyPolicy from "../Page/Home/PrivacyPolicy/PrivacyPolicy";
 import AuthLayout from "../Layouts/AuthLayout";
+import Register from "../Page/Authentication/Register/Register";
 
 export const router = createBrowserRouter([
   {
@@ -32,5 +33,11 @@ export const router = createBrowserRouter([
   {
     path: "/",
     Component: AuthLayout,
+    children: [
+      {
+        path: "/register",
+        Component: Register,
+      },
+    ],
   },
 ]);
