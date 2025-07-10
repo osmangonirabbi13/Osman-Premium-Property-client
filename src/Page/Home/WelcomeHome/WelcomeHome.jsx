@@ -115,9 +115,9 @@ export default function WelcomeHome() {
               stone bring a rich tactility to the rooms.
             </p>
             <p className="text-justify text-[#c78960] text-2xl mb-10  ml-10">
-              The design for Luxtower came from looking at the city`s existing
-              buildings and thinking about which ones you might want to live in,
-              not just look at.
+              The design for Osman Premium Property came from looking at the
+              city`s existing buildings and thinking about which ones you might
+              want to live in, not just look at.
             </p>
             <Link
               to={"/appartment"}
