@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
+import useAuth from "../../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -8,15 +10,21 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const { signIn } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/";
 
   const onSubmit = (data) => {
-    console.log("Login Data:", data);
-
-    navigate(from);
+    signIn(data.email, data.password)
+      .then((result) => {
+        console.log(result);
+        toast.success("Login successful!");
+        navigate(from);
+      })
+      .catch((error) => {
+        toast.error(error.message || "Login failed. Please try again.");
+      });
   };
 
   return (
@@ -45,11 +53,6 @@ const Login = () => {
             />
             {errors.password?.type === "required" && (
               <p className="text-red-500">Password is required</p>
-            )}
-            {errors.password?.type === "minLength" && (
-              <p className="text-red-500">
-                Password must be at least 6 characters
-              </p>
             )}
 
             {/* Forgot */}
