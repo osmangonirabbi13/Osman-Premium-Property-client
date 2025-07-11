@@ -7,6 +7,7 @@ import PrivacyPolicy from "../Page/Home/PrivacyPolicy/PrivacyPolicy";
 import AuthLayout from "../Layouts/AuthLayout";
 import Register from "../Page/Authentication/Register/Register";
 import Login from "../Page/Authentication/Login/login";
+import AllApartments from "../Page/All Apartments/Apartments";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "/PrivacyPolicy",
         Component: PrivacyPolicy,
+      },
+      {
+        path: "/appartment",
+        Component: AllApartments,
       },
     ],
   },
