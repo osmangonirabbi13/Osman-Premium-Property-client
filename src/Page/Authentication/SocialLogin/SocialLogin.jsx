@@ -2,10 +2,11 @@ import React from "react";
 import useAuth from "../../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import useAxios from "../../../Hooks/useAxios";
 
 const SocialLogin = () => {
   const { signInWithGoogle } = useAuth();
-
+  const axiosInstance = useAxios();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/";
@@ -14,6 +15,15 @@ const SocialLogin = () => {
       .then(async (result) => {
         const user = result.user;
         console.log(user);
+        const userInfo = {
+          email: user.email,
+          role: "user", // default role
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString(),
+        };
+
+        const res = await axiosInstance.post("/users", userInfo);
+        console.log("user update info", res.data);
         toast.success("Google SignIn successful!");
         navigate(from);
       })

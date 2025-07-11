@@ -5,6 +5,7 @@ import axios from "axios";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import useAxios from "../../../Hooks/useAxios";
 const Register = () => {
   const {
     register,
@@ -13,6 +14,7 @@ const Register = () => {
   } = useForm();
   const { createUser, updateUserProfile } = useAuth();
   const [profilePic, setProfilePic] = useState("");
+  const axiosInstance = useAxios();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/";
@@ -20,6 +22,17 @@ const Register = () => {
   const onSubmit = (data) => {
     createUser(data.email, data.password)
       .then(async (result) => {
+        console.log(result);
+        // update userinfo in the database
+
+        const userInfo = {
+          email: data.email,
+          role: "user",
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString(),
+        };
+        const userRes = await axiosInstance.post("/users", userInfo);
+        console.log(userRes.data);
         // update user profile in firebase
         const userProfile = {
           displayName: data.name,
@@ -28,7 +41,6 @@ const Register = () => {
         updateUserProfile(userProfile)
           .then(() => {
             toast.success("Registration successful!");
-
             navigate(from);
           })
           .catch((error) => {
@@ -44,14 +56,22 @@ const Register = () => {
     const image = e.target.files[0];
     const formData = new FormData();
     formData.append("image", image);
-    console.log(formData);
 
     const uploadUrl = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_image_upload_key
-    };`;
+    }`;
 
-    const res = await axios.post(uploadUrl, formData);
-    setProfilePic(res.data.data.url);
+    try {
+      const res = await axios.post(uploadUrl, formData);
+      setProfilePic(res.data.data.url);
+      console.log("Image uploaded:", res.data.data.url);
+    } catch (error) {
+      console.error(
+        "Image upload failed:",
+        error.response?.data || error.message
+      );
+      toast.error("Image upload failed.");
+    }
   };
 
   return (
