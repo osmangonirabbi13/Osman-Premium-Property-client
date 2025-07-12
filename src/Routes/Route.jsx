@@ -12,6 +12,7 @@ import ApartmentDetails from "../Page/All Apartments/ApartmentDetails";
 import PrivateRoute from "../Provider/PrivateRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Makepayment from "../Page/Dashboard/Makepayment/Makepayment";
+import AgreementRequests from "../Page/Dashboard/AgreementRequests/AgreementRequests";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
       {
         path: "make-payment",
         Component: Makepayment,
+      },
+      {
+        path: "agreement-requests",
+        Component: AgreementRequests,
       },
     ],
   },
