@@ -4,10 +4,6 @@ import { Link } from "react-router";
 const Forbidden = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-base-200 text-center px-4">
-      <Helmet>
-        <title>Forbidden - </title>
-        <meta name="description" content="QuickDrop Courier Forbidden" />
-      </Helmet>
       <FaLock className="text-6xl text-error mb-4" />
       <h1 className="text-4xl font-bold text-error">403 - Forbidden</h1>
       <p className="text-lg text-gray-600 mt-2 max-w-md">

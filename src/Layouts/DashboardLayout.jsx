@@ -10,8 +10,10 @@ import {
   FaTasks,
   FaBoxOpen,
 } from "react-icons/fa";
+import useUserRole from "../Hooks/useUserRole";
 
 const DashboardLayout = () => {
+  const { role, roleLoading } = useUserRole();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -59,25 +61,9 @@ const DashboardLayout = () => {
 
           {/* My Profile */}
           <li>
-            <NavLink to="/dashboard/profile">
+            <NavLink to="/dashboard">
               <FaUserEdit className="inline-block mr-2" />
               My Profile
-            </NavLink>
-          </li>
-
-          {/* Make Payment */}
-          <li>
-            <NavLink to="/dashboard/make-payment">
-              <FaMoneyCheckAlt className="inline-block mr-2" />
-              Make Payment
-            </NavLink>
-          </li>
-
-          {/* Payment History */}
-          <li>
-            <NavLink to="/dashboard/payment-history">
-              <FaWallet className="inline-block mr-2" />
-              Payment History
             </NavLink>
           </li>
 
@@ -89,37 +75,64 @@ const DashboardLayout = () => {
             </NavLink>
           </li>
 
-          {/* Manage Members */}
-          <li>
-            <NavLink to="/dashboard/manage-members">
-              <FaUserCheck className="inline-block mr-2" />
-              Manage Members
-            </NavLink>
-          </li>
+          {/* member only routes */}
 
-          {/* Make Announcement */}
-          <li>
-            <NavLink to="/dashboard/make-announcement">
-              <FaBullhorn className="inline-block mr-2" />
-              Make Announcement
-            </NavLink>
-          </li>
+          {!roleLoading && role === "member" && (
+            <>
+              {/* Make Payment */}
+              <li>
+                <NavLink to="/dashboard/make-payment">
+                  <FaMoneyCheckAlt className="inline-block mr-2" />
+                  Make Payment
+                </NavLink>
+              </li>
 
-          {/* Agreement Requests */}
-          <li>
-            <NavLink to="/dashboard/agreement-requests">
-              <FaTasks className="inline-block mr-2" />
-              Agreement Requests
-            </NavLink>
-          </li>
+              {/* Payment History */}
+              <li>
+                <NavLink to="/dashboard/payment-history">
+                  <FaWallet className="inline-block mr-2" />
+                  Payment History
+                </NavLink>
+              </li>
+            </>
+          )}
+          {!roleLoading && role === "admin" && (
+            <>
+              {/* Manage Members */}
+              <li>
+                <NavLink to="/dashboard/manage-members">
+                  <FaUserCheck className="inline-block mr-2" />
+                  Manage Members
+                </NavLink>
+              </li>
 
-          {/* Manage Coupons */}
-          <li>
-            <NavLink to="/dashboard/manage-coupons">
-              <FaBoxOpen className="inline-block mr-2" />
-              Manage Coupons
-            </NavLink>
-          </li>
+              {/* Make Announcement */}
+              <li>
+                <NavLink to="/dashboard/make-announcement">
+                  <FaBullhorn className="inline-block mr-2" />
+                  Make Announcement
+                </NavLink>
+              </li>
+
+              {/* Agreement Requests */}
+              <li>
+                <NavLink to="/dashboard/agreement-requests">
+                  <FaTasks className="inline-block mr-2" />
+                  Agreement Requests
+                </NavLink>
+              </li>
+
+              {/* Manage Coupons */}
+              <li>
+                <NavLink to="/dashboard/manage-coupons">
+                  <FaBoxOpen className="inline-block mr-2" />
+                  Manage Coupons
+                </NavLink>
+              </li>
+            </>
+          )}
+
+          {/* admin only routes */}
         </ul>
       </div>
     </div>

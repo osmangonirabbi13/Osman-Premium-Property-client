@@ -18,6 +18,10 @@ import CouponManager from "../Page/Dashboard/CouponManager/CouponManager";
 import Makeadmin from "../Page/Dashboard/Makeadmin/Makeadmin";
 import Announcements from "../Page/Dashboard/MakeAnnouncements/Announcements";
 import MakeAnnouncement from "../Page/Dashboard/MakeAnnouncements/MakeAnnouncements";
+import Forbidden from "../Page/Shared/Forbidden";
+import DashboardHome from "../Page/Dashboard/DashboardHome/DashboardHome";
+import MemberRoute from "../Provider/MemberRoute";
+import AdminRoute from "../Provider/AdminRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "/appartment",
         Component: AllApartments,
+      },
+      {
+        path: "/forbidden",
+        Component: Forbidden,
       },
       {
         path: "/apartment/:id",
@@ -76,32 +84,68 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "make-payment",
-        Component: Makepayment,
-      },
-      {
-        path: "agreement-requests",
-        Component: AgreementRequests,
-      },
-      {
-        path: "payment-history",
-        Component: PaymentHistory,
-      },
-      {
-        path: "manage-coupons",
-        Component: CouponManager,
-      },
-      {
-        path: "manage-members",
-        Component: Makeadmin,
+        index: true,
+        Component: DashboardHome,
       },
       {
         path: "announcements",
         Component: Announcements,
       },
+
+      // member only routes
+
+      {
+        path: "make-payment",
+        element: (
+          <MemberRoute>
+            <Makepayment></Makepayment>
+          </MemberRoute>
+        ),
+      },
+
+      {
+        path: "payment-history",
+        element: (
+          <MemberRoute>
+            <PaymentHistory />
+          </MemberRoute>
+        ),
+      },
+
+      // Admin only routes
+
+      {
+        path: "agreement-requests",
+        element: (
+          <AdminRoute>
+            <AgreementRequests />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-coupons",
+        element: (
+          <AdminRoute>
+            <CouponManager></CouponManager>
+          </AdminRoute>
+        ),
+      },
+
+      {
+        path: "manage-members",
+        element: (
+          <AdminRoute>
+            <Makeadmin />
+          </AdminRoute>
+        ),
+      },
       {
         path: "make-announcement",
-        Component: MakeAnnouncement,
+        element: (
+          <AdminRoute>
+            <MakeAnnouncement />
+          </AdminRoute>
+        ),
       },
     ],
   },
