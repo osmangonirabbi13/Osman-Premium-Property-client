@@ -15,6 +15,7 @@ import Makepayment from "../Page/Dashboard/Makepayment/Makepayment";
 import AgreementRequests from "../Page/Dashboard/AgreementRequests/AgreementRequests";
 import PaymentHistory from "../Page/Dashboard/Payment History/PaymentHistory";
 import CouponManager from "../Page/Dashboard/CouponManager/CouponManager";
+import Makeadmin from "../Page/Dashboard/Makeadmin/Makeadmin";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: "manage-coupons",
         Component: CouponManager,
+      },
+      {
+        path: "manage-members",
+        Component: Makeadmin,
       },
     ],
   },

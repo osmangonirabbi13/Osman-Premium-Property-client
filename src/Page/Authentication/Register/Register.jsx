@@ -26,6 +26,7 @@ const Register = () => {
         // update userinfo in the database
 
         const userInfo = {
+          displayName: data.name,
           email: data.email,
           role: "user",
           created_at: new Date().toISOString(),
