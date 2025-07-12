@@ -13,6 +13,7 @@ import PrivateRoute from "../Provider/PrivateRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Makepayment from "../Page/Dashboard/Makepayment/Makepayment";
 import AgreementRequests from "../Page/Dashboard/AgreementRequests/AgreementRequests";
+import PaymentHistory from "../Page/Dashboard/Payment History/PaymentHistory";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path: "agreement-requests",
         Component: AgreementRequests,
+      },
+      {
+        path: "payment-history",
+        Component: PaymentHistory,
       },
     ],
   },

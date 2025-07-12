@@ -18,7 +18,7 @@ const CheckoutForm = ({ amount, info }) => {
   useEffect(() => {
     if (amount > 0) {
       axiosSecure
-        .post("/create-payment-intent", { amount: Math.round(amount * 100) })
+        .post("/create-payment-intent", { amount: Math.round(amount * 100) }) // Stripe expects amount in cents
         .then((res) => {
           setClientSecret(res.data.clientSecret);
         })
@@ -40,7 +40,7 @@ const CheckoutForm = ({ amount, info }) => {
 
     setProcessing(true);
 
-    // Create payment method
+    // Step 1: Create Stripe payment method
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
@@ -55,7 +55,7 @@ const CheckoutForm = ({ amount, info }) => {
       return;
     }
 
-    // Confirm payment
+    // Step 2: Confirm Stripe payment
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: paymentMethod.id,
@@ -67,29 +67,32 @@ const CheckoutForm = ({ amount, info }) => {
       return;
     }
 
+    // Step 3: Payment success – save to DB
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
 
       const paymentData = {
-        userEmail: user.email,
-        amount,
+        email: user.email, // ✅ must match server field
+        amount, // paid amount (after discount)
         transactionId: paymentIntent.id,
         month: info.month,
+        year: new Date().getFullYear(),
         discount: info.discount,
         rent: info.rent,
+        apartmentId: info.apartmentId,
         paymentDate: new Date(),
       };
 
       try {
         const res = await axiosSecure.post("/payments/save", paymentData);
         if (res.data.insertedId) {
-          toast.success("Payment successful!");
+          toast.success("💳 Payment successful & saved!");
         } else {
-          toast.error("Payment recorded, but failed to save.");
+          toast.error("Payment recorded, but failed to save in DB.");
         }
       } catch (err) {
-        setErrorMessage("Payment saved failed.");
         console.error(err);
+        toast.error("Payment save failed.");
       }
     }
 
@@ -108,9 +111,7 @@ const CheckoutForm = ({ amount, info }) => {
               base: {
                 fontSize: "16px",
                 color: "#32325d",
-                "::placeholder": {
-                  color: "#a0aec0",
-                },
+                "::placeholder": { color: "#a0aec0" },
               },
               invalid: {
                 color: "#fa755a",
