@@ -10,6 +10,7 @@ import Login from "../Page/Authentication/Login/login";
 import AllApartments from "../Page/All Apartments/Apartments";
 import ApartmentDetails from "../Page/All Apartments/ApartmentDetails";
 import PrivateRoute from "../Provider/PrivateRoute";
+import DashboardLayout from "../Layouts/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -59,5 +60,13 @@ export const router = createBrowserRouter([
         Component: Login,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
   },
 ]);
