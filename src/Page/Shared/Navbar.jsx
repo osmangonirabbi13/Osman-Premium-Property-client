@@ -1,8 +1,19 @@
 import { Link, NavLink } from "react-router";
 import { FaRegUser } from "react-icons/fa";
 import logo from "../../assets/logo.png";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, logOut, loading } = useAuth();
+  const handleLogOut = () => {
+    logOut()
+      .then((result) => {
+        console.log(result);
+        toast.success("Logout Successfully");
+      })
+      .catch((error) => console.log(error));
+  };
   const navItems = (
     <>
       <li>
@@ -88,13 +99,59 @@ const Navbar = () => {
 
         {/* Always on right: Login */}
         <div className="flex-none">
-          <Link
-            to="/login"
-            className="flex items-center gap-2 font-bold text-white border border-white px-3 py-1 rounded hover:bg-white hover:text-black transition"
-          >
-            <FaRegUser className="text-lg" />
-            <span>Login</span>
-          </Link>
+          <div className="navbar-end">
+            {loading ? (
+              <span className="loading loading-spinner loading-sm"></span>
+            ) : user ? (
+              <div className="dropdown   dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      src={user.photoURL || "/default-avatar.png"}
+                      alt="user"
+                    />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 p-4 shadow  rounded-box w-72 bg-[rgba(0,0,0,0.4)] "
+                >
+                  <li className="pb-2 border-b  ">
+                    <p className="text-sm text-white">{user.displayName}</p>
+                    <p className="text-xs text-white">{user.email}</p>
+                    {user && (
+                      <>
+                        <li>
+                          <NavLink
+                            className="font-bold btn w-full  btn-neutral  uppercase mt-4"
+                            to="/dashboard"
+                          >
+                            Dashboard
+                          </NavLink>
+                        </li>
+                      </>
+                    )}
+                  </li>
+                  <li className="pt-2 ">
+                    <button
+                      onClick={handleLogOut}
+                      className="btn text-white btn-outline border-white hover:text-black transition hover:bg-white"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="flex items-center gap-2 font-bold text-white border border-white px-3 py-1 rounded hover:bg-white hover:text-black transition"
+              >
+                <FaRegUser className="text-lg" />
+                <span>Login</span>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>
