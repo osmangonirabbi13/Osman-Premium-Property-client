@@ -6,14 +6,15 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOut, loading } = useAuth();
+
   const handleLogOut = () => {
     logOut()
-      .then((result) => {
-        console.log(result);
+      .then(() => {
         toast.success("Logout Successfully");
       })
       .catch((error) => console.log(error));
   };
+
   const navItems = (
     <>
       <li>
@@ -31,7 +32,6 @@ const Navbar = () => {
           ABOUT
         </NavLink>
       </li>
-
       <li>
         <NavLink className="font-bold text-white" to="/contact">
           CONTACT
@@ -50,10 +50,9 @@ const Navbar = () => {
 
   return (
     <div className="w-full bg-[rgba(0,0,0,0.4)] fixed top-0 z-50">
-      <div className="navbar  px-2 md:px-12 lg:px-16 xl:px-50 lg:py-4 ">
-        {/* Mobile Start: Hamburger + Logo */}
+      <div className="navbar px-2 md:px-12 lg:px-16 xl:px-50 lg:py-4">
+        {/* Mobile: Hamburger + Logo */}
         <div className="flex flex-1 items-center lg:hidden gap-2">
-          {/* Hamburger */}
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost text-white">
               <svg
@@ -79,31 +78,30 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* Logo */}
-          <Link to="/" className=" normal-case text-xl">
+          <Link to="/" className="normal-case text-xl">
             <img src={logo} alt="Logo" className="h-10 md:h-14" />
           </Link>
         </div>
 
-        {/* Desktop: Logo */}
+        {/* Desktop Logo */}
         <div className="flex-none hidden lg:flex">
-          <Link to="/" className=" normal-case text-xl">
+          <Link to="/" className="normal-case text-xl">
             <img src={logo} alt="Logo" className="h-12" />
           </Link>
         </div>
 
-        {/* Center nav items (desktop only) */}
+        {/* Center nav items for desktop */}
         <div className="hidden lg:flex flex-1 justify-center">
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
 
-        {/* Always on right: Login */}
+        {/* Right side: login or profile */}
         <div className="flex-none">
           <div className="navbar-end">
             {loading ? (
               <span className="loading loading-spinner loading-sm"></span>
             ) : user ? (
-              <div className="dropdown   dropdown-end">
+              <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
                     <img
@@ -114,25 +112,21 @@ const Navbar = () => {
                 </label>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 p-4 shadow  rounded-box w-72 bg-[rgba(0,0,0,0.4)] "
+                  className="menu menu-sm dropdown-content mt-3 p-4 shadow rounded-box w-72 bg-[rgba(0,0,0,0.4)]"
                 >
-                  <li className="pb-2 border-b  ">
+                  <li className="pb-2 border-b">
                     <p className="text-sm text-white">{user.displayName}</p>
                     <p className="text-xs text-white">{user.email}</p>
-                    {user && (
-                      <>
-                        <li>
-                          <NavLink
-                            className="font-bold btn w-full  btn-neutral  uppercase mt-4"
-                            to="/dashboard"
-                          >
-                            Dashboard
-                          </NavLink>
-                        </li>
-                      </>
-                    )}
                   </li>
-                  <li className="pt-2 ">
+                  <li>
+                    <NavLink
+                      className="font-bold btn w-full btn-neutral uppercase mt-2"
+                      to="/dashboard"
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                  <li>
                     <button
                       onClick={handleLogOut}
                       className="btn text-white btn-outline border-white hover:text-black transition hover:bg-white"

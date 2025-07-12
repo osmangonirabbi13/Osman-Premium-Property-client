@@ -28,13 +28,18 @@ const Payment = () => {
     axiosSecure
       .get(`/users/profile?email=${user.email}`)
       .then((res) => {
-        setProfile(res.data);
-        setRent(res.data.rent || 0);
+        const profileData = res.data;
+        setProfile(profileData);
+        setRent(Number(profileData.rent) || 0); // Ensure rent is a number
       })
       .catch(() => {
         toast.error("Failed to fetch profile data");
       });
   }, [user, axiosSecure]);
+
+  useEffect(() => {
+    setRent(Number(profile.rent) || 0);
+  }, [profile.rent]);
 
   // Apply coupon discount
   const applyCoupon = async () => {
@@ -53,6 +58,10 @@ const Payment = () => {
     }
   };
 
+  const formattedRent = Number(rent || 0).toFixed(2);
+  const formattedDiscount = Number(discount || 0).toFixed(2);
+  const totalPayable = Number(rent - discount || 0).toFixed(2);
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-[#1e1e2d] py-10 px-4">
       <section className="container mx-auto max-w-4xl bg-white dark:bg-boxdark p-6 rounded-lg shadow-md">
@@ -67,9 +76,9 @@ const Payment = () => {
             </label>
             <input
               readOnly
-              value={user.email}
+              value={user?.email || ""}
               type="text"
-              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
             />
           </div>
 
@@ -83,7 +92,7 @@ const Payment = () => {
                 readOnly
                 value={profile.blockNo || ""}
                 type="text"
-                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
               />
             </div>
 
@@ -95,7 +104,7 @@ const Payment = () => {
                 readOnly
                 value={profile.floorNo || ""}
                 type="text"
-                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
               />
             </div>
           </div>
@@ -110,7 +119,7 @@ const Payment = () => {
                 readOnly
                 value={profile.apartmentNo || ""}
                 type="text"
-                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
               />
             </div>
 
@@ -120,9 +129,9 @@ const Payment = () => {
               </label>
               <input
                 readOnly
-                value={rent}
+                value={formattedRent}
                 type="text"
-                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
               />
             </div>
           </div>
@@ -133,7 +142,7 @@ const Payment = () => {
               Select Month
             </label>
             <select
-              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
               value={selectedMonth}
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
@@ -163,7 +172,7 @@ const Payment = () => {
             <input
               type="text"
               placeholder="Enter coupon code"
-              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
               value={coupon}
               onChange={(e) => setCoupon(e.target.value)}
             />
@@ -195,14 +204,12 @@ const Payment = () => {
 
         {/* Payment Summary */}
         <div className="p-4 mt-6 bg-transparent border-[1.5px] border-stroke text-textT rounded-lg">
-          <p className="text-sm font-medium">
-            Original Rent: ${rent.toFixed(2)}
-          </p>
+          <p className="text-sm font-medium">Original Rent: ${formattedRent}</p>
           <p className="text-sm font-medium text-green-600">
-            Discount: -${discount.toFixed(2)}
+            Discount: -${formattedDiscount}
           </p>
           <p className="text-lg font-bold mt-2">
-            Total Payable: ${(rent - discount).toFixed(2)}
+            Total Payable: ${totalPayable}
           </p>
         </div>
       </section>
