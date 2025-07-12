@@ -14,8 +14,6 @@ function Announcements() {
     queryFn: () => axiosSecure.get("/announcement").then((res) => res.data),
   });
 
-  console.log(announcementsData);
-
   if (isLoading)
     return <span className="loading loading-spinner loading-xl"></span>;
   if (error)
