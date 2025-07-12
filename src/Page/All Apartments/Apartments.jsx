@@ -2,7 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
-
+import BGimg from "../../assets/About/south.jpg";
+import {
+  FaLayerGroup,
+  FaBuilding,
+  FaDollarSign,
+  FaDoorOpen,
+} from "react-icons/fa";
 const fetchApartments = async (axiosInstance, page, minRent, maxRent) => {
   let url = `/all-apartments?page=${page}`;
   if (minRent) url += `&minRent=${minRent}`;
@@ -32,77 +38,116 @@ const AllApartments = () => {
     setFilter({ min: minRent, max: maxRent });
   };
 
-  if (isLoading)
-    return <p className="text-center mt-10">Loading apartments...</p>;
-  if (isError)
-    return (
-      <p className="text-center text-red-500 mt-10">Failed to load data.</p>
-    );
-
   return (
-    <div className="p-4 pt-50 max-w-7xl mx-auto">
-      <form
-        onSubmit={handleSearch}
-        className="mb-6 flex flex-wrap gap-4 justify-center items-center"
+    <>
+      {/* 🔷 Banner Section */}
+      <div
+        className="w-full h-[300px] md:h-[450px] flex justify-center items-center bg-center bg-fixed bg-cover bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(${BGimg})`,
+        }}
       >
-        <input
-          type="number"
-          placeholder="Min Rent"
-          value={minRent}
-          onChange={(e) => setMinRent(e.target.value)}
-          className="border rounded px-4 py-2 w-32"
-        />
-        <input
-          type="number"
-          placeholder="Max Rent"
-          value={maxRent}
-          onChange={(e) => setMaxRent(e.target.value)}
-          className="border rounded px-4 py-2 w-32"
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+        <h1 className="text-white text-3xl md:text-5xl font-bold">
+          All Apartments
+        </h1>
+      </div>
+
+      {/* 🔶 Content Section Starts Below */}
+      <div className="p-4 pt-16 max-w-7xl mx-auto -mt-12 relative z-10">
+        <form
+          onSubmit={handleSearch}
+          className="mb-6 flex flex-wrap gap-4 justify-center items-center"
         >
-          Search
-        </button>
-      </form>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {data?.data?.map((apartment) => (
-          <Link to={`/apartments/${apartment._id}`} key={apartment._id}>
-            <div className="border p-4 rounded shadow hover:shadow-md transition cursor-pointer">
-              <img
-                src={apartment.thumbnail}
-                alt="Apartment"
-                className="h-48 w-full object-cover rounded"
-              />
-              <h3 className="mt-2 font-bold text-lg">
-                {apartment.apartmentNo}
-              </h3>
-              <p>Block: {apartment.block}</p>
-              <p>Floor: {apartment.floor}</p>
-              <p>Rent: ${apartment.rent}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      <div className="flex justify-center mt-8 gap-2">
-        {Array.from({ length: data?.totalPages || 1 }, (_, idx) => (
+          <input
+            type="number"
+            placeholder="Min Rent"
+            value={minRent}
+            onChange={(e) => setMinRent(e.target.value)}
+            className="border rounded px-4 py-2 w-32"
+          />
+          <input
+            type="number"
+            placeholder="Max Rent"
+            value={maxRent}
+            onChange={(e) => setMaxRent(e.target.value)}
+            className="border rounded px-4 py-2 w-32"
+          />
           <button
-            key={idx + 1}
-            onClick={() => setPage(idx + 1)}
-            className={`px-4 py-2 rounded border ${
-              page === idx + 1
-                ? "bg-blue-600 text-white"
-                : "bg-white text-blue-600"
-            }`}
+            type="submit"
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
           >
-            {idx + 1}
+            Search
           </button>
-        ))}
+        </form>
+
+        {/* Loading/Error State */}
+        {isLoading && (
+          <p className="text-center mt-10">Loading apartments...</p>
+        )}
+        {isError && (
+          <p className="text-center text-red-500 mt-10">Failed to load data.</p>
+        )}
+
+        {/* Apartment Cards */}
+        {!isLoading && !isError && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {data?.data?.map((apartment) => (
+                <Link to={`/apartment/${apartment._id}`} key={apartment._id}>
+                  <div className="border border-[#E5E7EB] p-4 rounded shadow hover:shadow-md transition cursor-pointer flex flex-col h-full">
+                    <img
+                      src={apartment.thumbnail}
+                      alt="Apartment"
+                      className="h-48 w-full object-cover rounded"
+                    />
+
+                    <div className="flex-1">
+                      <h3 className="mt-2 font-bold text-lg flex items-center gap-2">
+                        <FaDoorOpen />
+                        {apartment.floor} Floor - Apartment{" "}
+                        {apartment.apartmentNo}
+                      </h3>
+                      <p className="flex items-center gap-2">
+                        <FaBuilding /> Block: {apartment.block}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <FaLayerGroup /> Floor: {apartment.floor}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <FaDollarSign /> Rent: ${apartment.rent}
+                      </p>
+                    </div>
+                    <Link
+                      to={`/apartment/${apartment._id}`}
+                      className="w-full text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition block mt-4"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            <div className="flex justify-center mt-8 gap-2">
+              {Array.from({ length: data?.totalPages || 1 }, (_, idx) => (
+                <button
+                  key={idx + 1}
+                  onClick={() => setPage(idx + 1)}
+                  className={`px-4 py-2 rounded border cursor-pointer ${
+                    page === idx + 1
+                      ? "bg-blue-600 text-white"
+                      : "bg-white text-blue-600"
+                  }`}
+                >
+                  {idx + 1}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

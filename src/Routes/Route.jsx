@@ -8,6 +8,7 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Register from "../Page/Authentication/Register/Register";
 import Login from "../Page/Authentication/Login/login";
 import AllApartments from "../Page/All Apartments/Apartments";
+import ApartmentDetails from "../Page/All Apartments/ApartmentDetails";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "/appartment",
         Component: AllApartments,
+      },
+      {
+        path: "/apartment/:id",
+        Component: ApartmentDetails,
       },
     ],
   },
