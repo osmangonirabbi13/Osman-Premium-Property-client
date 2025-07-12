@@ -86,7 +86,7 @@ const CheckoutForm = ({ amount, info }) => {
       try {
         const res = await axiosSecure.post("/payments/save", paymentData);
         if (res.data.insertedId) {
-          toast.success("💳 Payment successful & saved!");
+          toast.success("💳 Payment successful ");
         } else {
           toast.error("Payment recorded, but failed to save in DB.");
         }
