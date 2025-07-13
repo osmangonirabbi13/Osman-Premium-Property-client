@@ -7,12 +7,14 @@ import Location from "../Location/Location";
 import WeProvide from "../WeProvide/WeProvide";
 import Testimonial from "../Testimonial/Testimonial";
 import Compani from "../Company/Company";
+import HomeCard from "../HomeCard/HomeCard";
 
 const Home = () => {
   return (
     <div>
       <Banner />
       <WelcomeHome />
+      <HomeCard />
       <ProjectOverview />
       <Features />
       <Location />

@@ -93,7 +93,11 @@ const AllApartments = () => {
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {data?.data?.map((apartment) => (
-                <Link to={`/apartment/${apartment._id}`} key={apartment._id}>
+                <Link
+                  to={`/apartment/${apartment._id}`}
+                  key={apartment._id}
+                  className="block"
+                >
                   <div className="border border-[#E5E7EB] p-4 rounded shadow hover:shadow-md transition cursor-pointer flex flex-col h-full">
                     <img
                       src={apartment.thumbnail}
@@ -117,12 +121,10 @@ const AllApartments = () => {
                         <FaDollarSign /> Rent: ${apartment.rent}
                       </p>
                     </div>
-                    <Link
-                      to={`/apartment/${apartment._id}`}
-                      className="w-full text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition block mt-4"
-                    >
+
+                    <div className="w-full text-center bg-blue-600 text-white py-2 rounded mt-4">
                       View Details
-                    </Link>
+                    </div>
                   </div>
                 </Link>
               ))}
