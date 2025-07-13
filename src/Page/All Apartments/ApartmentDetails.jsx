@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -24,7 +24,6 @@ const ApartmentDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const navigate = useNavigate();
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -83,12 +82,13 @@ const ApartmentDetails = () => {
     // If request pending
     if (agreementStatus?.status === "pending") {
       toast("Your agreement request is pending admin approval.");
+
       return;
     }
 
     // If approved, redirect to payment page
     if (agreementStatus?.status === "approved") {
-      navigate("/payment");
+      toast.success("Your request approved please check payment page");
       return;
     }
 

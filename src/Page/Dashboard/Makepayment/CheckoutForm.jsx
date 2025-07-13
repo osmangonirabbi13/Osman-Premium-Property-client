@@ -12,13 +12,13 @@ const CheckoutForm = ({ amount, info }) => {
 
   const [clientSecret, setClientSecret] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [transactionId, setTransactionId] = useState("");
   const [processing, setProcessing] = useState(false);
 
+  // ✅ Create payment intent on load
   useEffect(() => {
     if (amount > 0) {
       axiosSecure
-        .post("/create-payment-intent", { amount: Math.round(amount * 100) }) // Stripe expects amount in cents
+        .post("/create-payment-intent", { amount: Math.round(amount * 100) })
         .then((res) => {
           setClientSecret(res.data.clientSecret);
         })
@@ -29,18 +29,41 @@ const CheckoutForm = ({ amount, info }) => {
     }
   }, [amount, axiosSecure]);
 
+  // ✅ Check if already paid
+  const checkAlreadyPaid = async () => {
+    try {
+      const res = await axiosSecure.get("/payments/check", {
+        params: {
+          email: user.email,
+          month: info.month,
+        },
+      });
+      return res.data.alreadyPaid;
+    } catch (err) {
+      console.error("Check failed", err);
+      return false;
+    }
+  };
+
+  // ✅ Handle Stripe Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
 
-    if (!stripe || !elements) return;
+    // Step 1: Check duplicate
+    const alreadyPaid = await checkAlreadyPaid();
+    if (alreadyPaid) {
+      toast.error(`You already paid for ${info.month}`);
+      return;
+    }
 
+    if (!stripe || !elements) return;
     const card = elements.getElement(CardElement);
     if (!card) return;
 
     setProcessing(true);
 
-    // Step 1: Create Stripe payment method
+    // Step 2: Create payment method
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
@@ -55,7 +78,7 @@ const CheckoutForm = ({ amount, info }) => {
       return;
     }
 
-    // Step 2: Confirm Stripe payment
+    // Step 3: Confirm payment
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: paymentMethod.id,
@@ -67,13 +90,11 @@ const CheckoutForm = ({ amount, info }) => {
       return;
     }
 
-    // Step 3: Payment success – save to DB
+    // Step 4: Save to DB
     if (paymentIntent.status === "succeeded") {
-      setTransactionId(paymentIntent.id);
-
       const paymentData = {
-        email: user.email, // ✅ must match server field
-        amount, // paid amount (after discount)
+        email: user.email,
+        amount,
         transactionId: paymentIntent.id,
         month: info.month,
         year: new Date().getFullYear(),
@@ -86,13 +107,19 @@ const CheckoutForm = ({ amount, info }) => {
       try {
         const res = await axiosSecure.post("/payments/save", paymentData);
         if (res.data.insertedId) {
-          toast.success("💳 Payment successful ");
+          toast.success("💳 Payment successful");
         } else {
           toast.error("Payment recorded, but failed to save in DB.");
         }
       } catch (err) {
+        if (err.response?.status === 400) {
+          toast.error(
+            err.response.data?.message || "Already paid for this month."
+          );
+        } else {
+          toast.error("Payment save failed.");
+        }
         console.error(err);
-        toast.error("Payment save failed.");
       }
     }
 
@@ -138,13 +165,6 @@ const CheckoutForm = ({ amount, info }) => {
       >
         {processing ? "Processing..." : `Pay $${amount.toFixed(2)}`}
       </button>
-
-      {transactionId && (
-        <p className="text-green-600 text-sm mt-2">
-          ✅ Payment Successful! Transaction ID:{" "}
-          <span className="font-mono">{transactionId}</span>
-        </p>
-      )}
     </form>
   );
 };

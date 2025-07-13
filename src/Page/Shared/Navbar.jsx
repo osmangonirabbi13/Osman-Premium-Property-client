@@ -32,11 +32,7 @@ const Navbar = () => {
           ABOUT
         </NavLink>
       </li>
-      <li>
-        <NavLink className="font-bold text-white" to="/contact">
-          CONTACT
-        </NavLink>
-      </li>
+
       <li>
         <NavLink
           className="font-bold text-white uppercase"

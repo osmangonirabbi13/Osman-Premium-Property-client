@@ -22,15 +22,18 @@ import Forbidden from "../Page/Shared/Forbidden";
 import DashboardHome from "../Page/Dashboard/DashboardHome/DashboardHome";
 import MemberRoute from "../Provider/MemberRoute";
 import AdminRoute from "../Provider/AdminRoute";
+import ErrorPage from "../Page/ErronPage/ErrorPage";
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayouts,
+    ErrorBoundary: ErrorPage,
     children: [
       {
         index: true,
         Component: Home,
-        loader: () => fetch("http://localhost:3000/all-apartments"),
+        loader: () =>
+          fetch("https://osman-property-server.vercel.app/all-apartments"),
       },
       {
         path: "/about",
@@ -123,6 +126,7 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+
       {
         path: "manage-coupons",
         element: (

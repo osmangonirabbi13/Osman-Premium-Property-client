@@ -61,10 +61,10 @@ const DashboardLayout = () => {
 
           {/* My Profile */}
           <li>
-            <NavLink to="/dashboard">
-              <FaUserEdit className="inline-block mr-2" />
+            <Link className="bg-amber-200" to="/dashboard">
+              <FaUserEdit className="inline-block mr-2 " />
               My Profile
-            </NavLink>
+            </Link>
           </li>
 
           {/* Announcements */}

@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+a.active{
+  @apply bg-[#FA2371]
+}
