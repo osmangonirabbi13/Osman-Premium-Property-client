@@ -22,7 +22,7 @@ const Register = () => {
   const onSubmit = (data) => {
     createUser(data.email, data.password)
       .then(async (result) => {
-        console.log(result);
+        // console.log(result);
         // update userinfo in the database
 
         const userInfo = {
@@ -65,7 +65,7 @@ const Register = () => {
     try {
       const res = await axios.post(uploadUrl, formData);
       setProfilePic(res.data.data.url);
-      console.log("Image uploaded:", res.data.data.url);
+      // console.log("Image uploaded:", res.data.data.url);
     } catch (error) {
       console.error(
         "Image upload failed:",

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import AnnouncementsCard from "./AnnouncementsCard";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Loading from "../../Shared/Loading";
 
 function Announcements() {
   const axiosSecure = useAxiosSecure();
@@ -14,8 +15,7 @@ function Announcements() {
     queryFn: () => axiosSecure.get("/announcement").then((res) => res.data),
   });
 
-  if (isLoading)
-    return <span className="loading loading-spinner loading-xl"></span>;
+  if (isLoading) return <Loading />;
   if (error)
     return <span className="loading loading-spinner loading-xl"></span>;
 

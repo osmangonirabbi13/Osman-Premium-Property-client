@@ -9,6 +9,7 @@ import {
   FaDollarSign,
   FaDoorOpen,
 } from "react-icons/fa";
+import Loading from "../Shared/Loading";
 const fetchApartments = async (axiosInstance, page, minRent, maxRent) => {
   let url = `/all-apartments?page=${page}`;
   if (minRent) url += `&minRent=${minRent}`;
@@ -81,9 +82,7 @@ const AllApartments = () => {
         </form>
 
         {/* Loading/Error State */}
-        {isLoading && (
-          <p className="text-center mt-10">Loading apartments...</p>
-        )}
+        {isLoading && <Loading />}
         {isError && (
           <p className="text-center text-red-500 mt-10">Failed to load data.</p>
         )}

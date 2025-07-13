@@ -23,6 +23,7 @@ import DashboardHome from "../Page/Dashboard/DashboardHome/DashboardHome";
 import MemberRoute from "../Provider/MemberRoute";
 import AdminRoute from "../Provider/AdminRoute";
 import ErrorPage from "../Page/ErronPage/ErrorPage";
+import Loading from "../Page/Shared/Loading";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
         Component: Home,
         loader: () =>
           fetch("https://osman-property-server.vercel.app/all-apartments"),
+        HydrateFallback: Loading,
       },
       {
         path: "/about",

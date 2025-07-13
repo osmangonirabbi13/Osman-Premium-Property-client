@@ -14,7 +14,7 @@ const SocialLogin = () => {
     signInWithGoogle()
       .then(async (result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         const userInfo = {
           displayName: user.name,
           email: user.email,
@@ -24,7 +24,7 @@ const SocialLogin = () => {
         };
 
         const res = await axiosInstance.post("/users", userInfo);
-        console.log("user update info", res.data);
+        // console.log("user update info", res.data);
         toast.success("Google SignIn successful!");
         navigate(from);
       })

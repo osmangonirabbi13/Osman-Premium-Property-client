@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
+import Loading from "../../Shared/Loading";
 
 const UserListTable = () => {
   const { user } = useAuth();
@@ -82,7 +83,7 @@ const UserListTable = () => {
     });
   };
 
-  if (isLoading) return <div>Loading users...</div>;
+  if (isLoading) return <Loading />;
   if (isError) return <div>Error loading users</div>;
 
   return (
