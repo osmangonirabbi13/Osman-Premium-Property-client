@@ -1,10 +1,11 @@
 import { useParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 import BGimg from "../../assets/About/south.jpg";
 import {
   FaBuilding,
@@ -167,6 +168,25 @@ const ApartmentDetails = () => {
           </div>
 
           {/* Swiper thumbnails if you want */}
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={"auto"}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            modules={[Autoplay]}
+          >
+            {images.map((img, idx) => (
+              <SwiperSlide key={idx} style={{ width: "96px" }}>
+                <img
+                  src={img}
+                  onClick={() => setSelectedImage(img)}
+                  className={`w-24 h-24 object-cover rounded-lg cursor-pointer border hover:border-blue-500 ${
+                    selectedImage === img ? "border-4 border-blue-500" : ""
+                  }`}
+                  alt={`Thumb ${idx}`}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
           {/* ... can keep your swiper here */}
         </div>
 

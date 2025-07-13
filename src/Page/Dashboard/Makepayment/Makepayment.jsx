@@ -17,31 +17,48 @@ const Payment = () => {
   const [rent, setRent] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [coupon, setCoupon] = useState("");
+  const [couponMessage, setCouponMessage] = useState("");
   const [selectedMonth, setSelectedMonth] = useState(
     new Date().toLocaleString("en-US", { month: "long" })
   );
+  const [availableCoupons, setAvailableCoupons] = useState([]);
 
-  // Fetch user profile on load
+  // Fetch user profile and rent
   useEffect(() => {
     if (!user?.email) return;
 
     axiosSecure
       .get(`/users/profile?email=${user.email}`)
       .then((res) => {
-        const profileData = res.data;
-        setProfile(profileData);
-        setRent(Number(profileData.rent) || 0); // Ensure rent is a number
+        setProfile(res.data);
+        setRent(Number(res.data.rent) || 0);
       })
       .catch(() => {
         toast.error("Failed to fetch profile data");
       });
-  }, [user, axiosSecure]);
+  }, [user?.email, axiosSecure]);
 
+  // Fetch all active coupons
   useEffect(() => {
-    setRent(Number(profile.rent) || 0);
-  }, [profile.rent]);
+    axiosSecure
+      .get("/coupons")
+      .then((res) => {
+        // Filter only active coupons
+        const activeCoupons = res.data.filter((c) => c.isActive);
+        setAvailableCoupons(activeCoupons);
+      })
+      .catch(() => {
+        toast.error("Failed to load coupons");
+      });
+  }, [axiosSecure]);
 
-  // Apply coupon discount
+  // Reset discount when coupon or rent changes
+  useEffect(() => {
+    setDiscount(0);
+    setCouponMessage("");
+  }, [coupon, rent]);
+
+  // Apply coupon code manually
   const applyCoupon = async () => {
     if (!coupon) return toast.error("Please enter a coupon code");
 
@@ -49,12 +66,21 @@ const Payment = () => {
       const res = await axiosSecure.get(`/coupons/${coupon}`);
       const discountAmount = (res.data.discountPercentage * rent) / 100;
       setDiscount(discountAmount);
-      toast.success(res.data.description);
+      setCouponMessage(res.data.description || "Coupon applied successfully!");
+      toast.success(res.data.description || "Coupon applied!");
+
+      if (
+        res.data.description?.toLowerCase().includes("first month") ||
+        coupon.toLowerCase().includes("first")
+      ) {
+        toast.success("🎉 You’ve received a first month discount!");
+      }
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Invalid or inactive coupon code"
       );
       setDiscount(0);
+      setCouponMessage("");
     }
   };
 
@@ -68,6 +94,7 @@ const Payment = () => {
         <h2 className="text-2xl font-semibold text-textT mb-4">
           Payment Details
         </h2>
+
         <form className="space-y-4">
           {/* Member Email */}
           <div>
@@ -95,7 +122,6 @@ const Payment = () => {
                 className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
               />
             </div>
-
             <div>
               <label className="mb-3 block text-black dark:text-white">
                 Room No
@@ -122,7 +148,6 @@ const Payment = () => {
                 className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
               />
             </div>
-
             <div>
               <label className="mb-3 block text-black dark:text-white">
                 Rent
@@ -167,14 +192,14 @@ const Payment = () => {
             </select>
           </div>
 
-          {/* Coupon Code */}
+          {/* Coupon Input + Apply Button */}
           <div className="flex gap-2">
             <input
               type="text"
               placeholder="Enter coupon code"
               className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
               value={coupon}
-              onChange={(e) => setCoupon(e.target.value)}
+              onChange={(e) => setCoupon(e.target.value.toUpperCase())}
             />
             <button
               type="button"
@@ -184,19 +209,56 @@ const Payment = () => {
               Apply
             </button>
           </div>
+
+          {/* Coupon Message */}
+          {couponMessage && (
+            <p className="text-green-500 text-sm font-medium mt-1">
+              {couponMessage}
+            </p>
+          )}
+
+          {/* Available Coupons List */}
+          {availableCoupons.length > 0 && (
+            <div className="mt-4 p-3 border rounded bg-gray-50 dark:bg-[#2a2a40] max-h-40 overflow-auto">
+              <h4 className="font-semibold text-textT dark:text-white mb-2">
+                Available Coupons (Click to apply)
+              </h4>
+              <ul className="list-disc list-inside space-y-1 text-textT dark:text-white">
+                {availableCoupons.map((c) => (
+                  <li
+                    key={c._id}
+                    className="cursor-pointer hover:text-blue-600"
+                    onClick={() => {
+                      setCoupon(
+                        c.couponCode || c.code || c.code?.toUpperCase()
+                      );
+                      toast.success(
+                        `Coupon ${c.couponCode || c.code} selected!`
+                      );
+                    }}
+                    title={c.description}
+                  >
+                    {c.couponCode || c.code} - {c.discountPercentage}% off
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </form>
 
         {/* Stripe Payment Form */}
         <div className="mt-6">
           <Elements stripe={stripePromise}>
             <CheckoutForm
-              amount={rent - discount}
+              amount={Number(rent - discount)}
               info={{
                 month: selectedMonth,
                 apartmentId: profile.apartmentId,
-                discount: discount,
+                discount,
                 finalAmount: rent - discount,
-                rent: rent,
+                rent,
+                email: user?.email,
+                couponCode: coupon,
               }}
             />
           </Elements>
