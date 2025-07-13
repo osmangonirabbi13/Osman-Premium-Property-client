@@ -53,14 +53,14 @@ A full-featured apartment rental and building management web application with se
 
 ### 🔸 Client `.env`
 
-VITE_FIREBASE_API_KEY=your_firebase_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-VITE_payment_Key=your_stripe_publishable_key
-VITE_image_upload_key= your imgbb api key
+- VITE_FIREBASE_API_KEY=your_firebase_api_key
+- VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+- VITE_FIREBASE_PROJECT_ID=your_project_id
+- VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+- VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+- VITE_FIREBASE_APP_ID=your_app_id
+- VITE_payment_Key=your_stripe_publishable_key
+- VITE_image_upload_key= your imgbb api key
 
 
 ---
