@@ -20,7 +20,7 @@ const AuthLayout = () => {
         </div>
 
         {/* Form Section */}
-        <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-6">
+        <div className="w-full lg:w-1/2 bg-white dark:bg-gray-900 dark:text-white flex items-center justify-center p-6">
           <div className="w-full max-w-md">
             {/* Logo */}
             <div className="mb-6 text-left">

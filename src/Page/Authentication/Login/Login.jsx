@@ -29,27 +29,33 @@ const Login = () => {
   };
 
   return (
-    <div className="card  w-full max-w-sm shrink-0 ">
-      <div className="card-body">
-        <h1 className="text-5xl font-bold">Please Login</h1>
+    <div className="card  w-full max-w-sm shrink-0 dark:bg-gray-900 dark:text-white dark:shadow-xl dark:shadow-gray-300">
+      <div className="card-body dark:bg-gray-900 dark:text-white">
+        <h1 className="text-5xl font-bold dark:bg-gray-900 dark:text-white">
+          Please Login
+        </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <fieldset className="fieldset">
+          <fieldset className="fieldset ">
             {/* Email */}
-            <label className="label">Email</label>
+            <label className="label dark:bg-gray-900 dark:text-white">
+              Email
+            </label>
             <input
               type="email"
               {...register("email", { required: true })}
-              className="input"
+              className="input dark:bg-gray-900 dark:text-white"
               placeholder="Email"
             />
             {errors.email && <p className="text-red-500">Email is required</p>}
 
             {/* Password */}
-            <label className="label">Password</label>
+            <label className="label dark:bg-gray-900 dark:text-white">
+              Password
+            </label>
             <input
               type="password"
               {...register("password", { required: true, minLength: 6 })}
-              className="input"
+              className="input dark:bg-gray-900 dark:text-white"
               placeholder="Password"
             />
             {errors.password?.type === "required" && (
@@ -61,12 +67,14 @@ const Login = () => {
               <a className="link link-hover">Forgot password?</a>
             </div>
 
-            <button className="btn bg-[#CAEB66] text-black mt-4">Login</button>
+            <button className="btn bg-[#CAEB66] text-black mt-4 dark:bg-gray-900 dark:text-white">
+              Login
+            </button>
           </fieldset>
 
           <p>
             Don’t Have An Account ?{" "}
-            <Link state={{ from }} className="btn btn-link" to="/register">
+            <Link state={{ from }} className="btn btn-link " to="/register">
               Register
             </Link>
           </p>

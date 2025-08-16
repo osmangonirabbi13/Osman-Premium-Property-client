@@ -76,7 +76,7 @@ const Register = () => {
   };
 
   return (
-    <div className="card bg-base-100 w-full max-w-sm shrink-0">
+    <div className="card bg-base-100 dark:bg-gray-900 dark:text-white dark:shadow-xl dark:shadow-gray-300 w-full max-w-sm shrink-0">
       <div className="card-body">
         <h1 className="text-4xl font-bold">Create Account</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -86,7 +86,7 @@ const Register = () => {
             <input
               type="text"
               {...register("name", { required: true })}
-              className="input"
+              className="input dark:bg-gray-900 dark:text-white"
               placeholder="Your Name"
             />
             {errors.name && <p className="text-red-500">Name is required</p>}
@@ -96,7 +96,7 @@ const Register = () => {
             <input
               type="file"
               onChange={handleImageUpload}
-              className="file-input file-input-neutral"
+              className="file-input file-input-neutral dark:bg-gray-900 dark:text-white"
             />
 
             {/* Email Field */}
@@ -104,7 +104,7 @@ const Register = () => {
             <input
               type="email"
               {...register("email", { required: true })}
-              className="input"
+              className="input dark:bg-gray-900 dark:text-white"
               placeholder="Email"
             />
             {errors.email && <p className="text-red-500">Email is required</p>}
@@ -128,7 +128,7 @@ const Register = () => {
                     "Must include at least one lowercase letter",
                 },
               })}
-              className="input"
+              className="input dark:bg-gray-900 dark:text-white"
               placeholder="Password"
             />
 
@@ -137,15 +137,18 @@ const Register = () => {
               <p className="text-red-500 mt-1">{errors.password.message}</p>
             )}
 
-            <button className="btn bg-[#CAEB66] text-black mt-4">
+            <button className="btn bg-[#CAEB66]  dark:bg-gray-900 dark:text-white text-black mt-4">
               Register
             </button>
           </fieldset>
 
           <p className="mt-2">
-            <small className="text-lg">
+            <small className="text-lg dark:bg-gray-900 dark:text-white">
               Already have an account?{" "}
-              <Link className="text-red-500 underline" to="/login">
+              <Link
+                className="text-red-500 underline dark:bg-gray-900 "
+                to="/login"
+              >
                 Login
               </Link>
             </small>
