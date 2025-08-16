@@ -75,7 +75,7 @@ const AllApartments = () => {
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+            className="bg-[#1F4B3F] text-white py-2 rounded hover:bg-[#059445]  px-6  "
           >
             Search
           </button>
@@ -90,7 +90,7 @@ const AllApartments = () => {
         {/* Apartment Cards */}
         {!isLoading && !isError && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {data?.data?.map((apartment) => (
                 <Link
                   to={`/apartment/${apartment._id}`}
@@ -121,7 +121,7 @@ const AllApartments = () => {
                       </p>
                     </div>
 
-                    <div className="w-full text-center bg-blue-600 text-white py-2 rounded mt-4">
+                    <div className="w-full text-center bg-[#1F4B3F] text-white py-2  hover:bg-[#059445]  rounded mt-4">
                       View Details
                     </div>
                   </div>
