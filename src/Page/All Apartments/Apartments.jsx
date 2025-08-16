@@ -43,7 +43,7 @@ const AllApartments = () => {
     <>
       {/* 🔷 Banner Section */}
       <div
-        className="w-full h-[300px] md:h-[450px] flex justify-center items-center bg-center bg-fixed bg-cover bg-no-repeat"
+        className="w-full h-[300px] md:h-[450px] flex justify-center items-center bg-center bg-fixed bg-cover bg-no-repeat "
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(${BGimg})`,
         }}
@@ -54,7 +54,7 @@ const AllApartments = () => {
       </div>
 
       {/* 🔶 Content Section Starts Below */}
-      <div className="p-4 pt-16 max-w-7xl mx-auto -mt-12 relative z-10">
+      <div className="p-4 pt-16 max-w-8xl  lg:px-30 relative z-10 dark:bg-gray-900 dark:text-white">
         <form
           onSubmit={handleSearch}
           className="mb-6 flex flex-wrap gap-4 justify-center items-center"
@@ -137,8 +137,8 @@ const AllApartments = () => {
                   onClick={() => setPage(idx + 1)}
                   className={`px-4 py-2 rounded border cursor-pointer ${
                     page === idx + 1
-                      ? "bg-blue-600 text-white"
-                      : "bg-white text-blue-600"
+                      ? "bg-blue-600 text-white "
+                      : "bg-white text-blue-600 dark:bg-gray-900 dark:text-white"
                   }`}
                 >
                   {idx + 1}
