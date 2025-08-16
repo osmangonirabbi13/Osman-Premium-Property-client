@@ -199,7 +199,7 @@ const MakeAnnouncement = () => {
                 <div className="flex gap-2 items-start">
                   <button
                     onClick={() => handleEdit(announcement)}
-                    className="bg-yellow-400 px-2 py-1 rounded text-white"
+                    className="bg-[#1F4B3F]  hover:bg-[#059445]  px-2 py-1 rounded text-white"
                   >
                     Edit
                   </button>
