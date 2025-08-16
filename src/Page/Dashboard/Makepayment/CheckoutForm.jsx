@@ -129,9 +129,7 @@ const CheckoutForm = ({ amount, info }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label className="mb-3 block text-textT dark:text-white mt-2">
-          Card Details
-        </label>
+        <label className="mb-3 block text-textT  mt-2">Card Details</label>
         <CardElement
           options={{
             style: {

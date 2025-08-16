@@ -89,7 +89,7 @@ const Payment = () => {
   const totalPayable = Number(rent - discount || 0).toFixed(2);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-[#1e1e2d] py-10 px-4">
+    <div className="min-h-screen bg-gray-100  py-10 px-4">
       <section className="container mx-auto max-w-4xl bg-white dark:bg-boxdark p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold text-textT mb-4">
           Payment Details
@@ -98,39 +98,33 @@ const Payment = () => {
         <form className="space-y-4">
           {/* Member Email */}
           <div>
-            <label className="mb-3 block text-black dark:text-white">
-              Member Email
-            </label>
+            <label className="mb-3 block text-black ">Member Email</label>
             <input
               readOnly
               value={user?.email || ""}
               type="text"
-              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
+              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary  "
             />
           </div>
 
           {/* Block No & Room No */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="mb-3 block text-black dark:text-white">
-                Block No
-              </label>
+              <label className="mb-3 block text-black ">Block No</label>
               <input
                 readOnly
                 value={profile.blockNo || ""}
                 type="text"
-                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary  "
               />
             </div>
             <div>
-              <label className="mb-3 block text-black dark:text-white">
-                Room No
-              </label>
+              <label className="mb-3 block text-black ">Room No</label>
               <input
                 readOnly
                 value={profile.floorNo || ""}
                 type="text"
-                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary "
               />
             </div>
           </div>
@@ -138,36 +132,30 @@ const Payment = () => {
           {/* Apartment No & Rent */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="mb-3 block text-black dark:text-white">
-                Apartment No
-              </label>
+              <label className="mb-3 block text-black ">Apartment No</label>
               <input
                 readOnly
                 value={profile.apartmentNo || ""}
                 type="text"
-                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary d"
               />
             </div>
             <div>
-              <label className="mb-3 block text-black dark:text-white">
-                Rent
-              </label>
+              <label className="mb-3 block text-black ">Rent</label>
               <input
                 readOnly
                 value={formattedRent}
                 type="text"
-                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary "
               />
             </div>
           </div>
 
           {/* Select Month */}
           <div>
-            <label className="mb-3 block text-black dark:text-white">
-              Select Month
-            </label>
+            <label className="mb-3 block text-black ">Select Month</label>
             <select
-              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
+              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary "
               value={selectedMonth}
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
@@ -197,7 +185,7 @@ const Payment = () => {
             <input
               type="text"
               placeholder="Enter coupon code"
-              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white"
+              className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary  "
               value={coupon}
               onChange={(e) => setCoupon(e.target.value.toUpperCase())}
             />
@@ -219,11 +207,11 @@ const Payment = () => {
 
           {/* Available Coupons List */}
           {availableCoupons.length > 0 && (
-            <div className="mt-4 p-3 border rounded bg-gray-50 dark:bg-[#2a2a40] max-h-40 overflow-auto">
-              <h4 className="font-semibold text-textT dark:text-white mb-2">
+            <div className="mt-4 p-3 border rounded bg-gray-50  max-h-40 overflow-auto">
+              <h4 className="font-semibold text-textT  mb-2">
                 Available Coupons (Click to apply)
               </h4>
-              <ul className="list-disc list-inside space-y-1 text-textT dark:text-white">
+              <ul className="list-disc list-inside space-y-1 text-textT ">
                 {availableCoupons.map((c) => (
                   <li
                     key={c._id}

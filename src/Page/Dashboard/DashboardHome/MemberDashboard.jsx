@@ -16,7 +16,7 @@ const MemberDashboard = () => {
   });
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 text-center">
+    <div className="bg-white  rounded-xl shadow p-6 text-center">
       <img
         src={user?.photoURL}
         alt="Profile"
@@ -26,19 +26,19 @@ const MemberDashboard = () => {
       <p className="text-sm text-gray-500">{user?.email}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6 text-sm">
-        <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded">
+        <div className="bg-gray-100  p-4 rounded">
           <p className="font-bold text-green-600">🏢 Agreement:</p>
           <p>{data?.agreementDate?.split("T")[0] || "None"}</p>
         </div>
-        <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded">
+        <div className="bg-gray-100  p-4 rounded">
           <p className="font-bold text-green-600">🏢 Floor:</p>
           <p>{data?.floorNo || "None"}</p>
         </div>
-        <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded">
+        <div className="bg-gray-100  p-4 rounded">
           <p className="font-bold text-red-500">🏢 Block:</p>
           <p>{data?.blockNo || "None"}</p>
         </div>
-        <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded">
+        <div className="bg-gray-100  p-4 rounded">
           <p className="font-bold text-blue-600">🏢 Room No:</p>
           <p>{data?.apartmentNo || "None"}</p>
         </div>
