@@ -75,7 +75,7 @@ const Banner = () => {
                 {item.desc}
               </p>
               <Link
-                to="/services" // ✅ Add your desired route here
+                to="/appartment"
                 className="w-[250px] mt-5 hover:bg-[#c78960] hover:text-black text-center font-bold text-white p-2 border-2 border-white transition-all duration-300"
               >
                 EXPLORE

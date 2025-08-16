@@ -12,8 +12,8 @@ const HomeCard = () => {
   const apartments = data?.data || [];
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">
+    <div className="p-4 bg-[#FFEDE9]">
+      <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold mb-6 text-center pt-4">
         Find Your Perfect Home
       </h1>
       <p className="text-xl mb-6 text-center">
@@ -24,7 +24,7 @@ const HomeCard = () => {
         {apartments.map((apartment) => (
           <div
             key={apartment._id}
-            className="border border-[#E5E7EB] p-4 rounded shadow hover:shadow-md transition flex flex-col h-full"
+            className="border border-[#E5E7EB]  p-4 rounded shadow hover:shadow-lg transition flex flex-col h-full"
           >
             <img
               src={apartment.thumbnail}
@@ -50,7 +50,7 @@ const HomeCard = () => {
 
             <Link
               to={`/apartment/${apartment._id}`}
-              className="w-full text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition block mt-4"
+              className="w-full text-center bg-[#1F4B3F] text-white py-2 rounded hover:bg-[#059445] transition block mt-4"
             >
               View Details
             </Link>
@@ -62,7 +62,7 @@ const HomeCard = () => {
       <div className="flex justify-center mt-8">
         <Link
           to="/appartment"
-          className="text-center px-8 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          className="text-center px-16 bg-[#1F4B3F] text-white py-2 rounded hover:bg-[#059445]  transition"
         >
           VIEW ALL
         </Link>
