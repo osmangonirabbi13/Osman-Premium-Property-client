@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Andada+Pro:ital,wght@0,400..840;1,400..840&display=swap');
+
 @import "tailwindcss";
 @plugin "daisyui";
 
 
 a.active{
   @apply bg-[#FA2371]
+}
+body{
+  font-family: "Andada Pro", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }

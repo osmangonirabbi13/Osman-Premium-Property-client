@@ -20,7 +20,7 @@ const HomeCard = () => {
         Easy booking for hassle-free apartment viewings
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 max-w-8xl  lg:px-8 mx-auto">
         {apartments.map((apartment) => (
           <div
             key={apartment._id}
