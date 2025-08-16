@@ -5,12 +5,14 @@ A full-featured apartment rental and building management web application with se
 ## 🔗 Live Links
 
 - 🌐 Live Site: [View Website](https://osman-premium-property.web.app/)
+-  💻 Client Repo: [GitHub Client](https://github.com/osmangonirabbi13/Osman-Premium-Property-client)
+- 🛠️ Server Repo: [GitHub Server](https://github.com/osmangonirabbi13/Osman-Premium-Property-Server)
 
 ---
 ## 👨‍💼 Admin Email And Pass 
 
-. Email : superadmin@gmail.com
-. Password : Admin123
+- Email : superadmin@gmail.com
+- Password : Admin123
 
 ---
 
