@@ -20,7 +20,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col md:flex-row items-center">
+    <div className="w-full flex flex-col md:flex-row items-center dark:bg-gray-900 dark:text-white">
       {/* Left: Image */}
       <div className="w-full md:w-1/2">
         <img
@@ -48,8 +48,8 @@ const Testimonial = () => {
           {reviews.map((review) => (
             <SwiperSlide key={review._id}>
               <div className="text-center px-4">
-                <FaQuoteLeft className="text-[50px] text-gray-400 mx-auto mb-4" />
-                <p className="text-lg text-gray-700 italic mb-4">
+                <FaQuoteLeft className="text-[50px] text-gray-400 dark:text-white mx-auto mb-4" />
+                <p className="text-lg text-gray-700 dark:text-white italic mb-4">
                   {review.details}
                 </p>
                 <h3 className="text-xl font-semibold text-orange-500">

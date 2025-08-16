@@ -34,10 +34,10 @@ const ProjectOverview = () => {
   return (
     <div
       ref={sectionRef}
-      className="w-full overflow-hidden flex  flex-col items-center p-2 md:p-5 xl:p-10 py-10 relative bg-[#ffefe5]"
+      className="w-full overflow-hidden flex  flex-col items-center p-2 md:p-5 xl:p-10 py-10 relative bg-[#ffefe5] dark:bg-gray-900 dark:text-white "
     >
       <div className="w-full z-10 flex flex-col justify-center items-center">
-        <h3 className="text-3xl uppercase text-[#312720] font-bold ">
+        <h3 className="text-3xl uppercase text-[#312720] font-bold dark:bg-gray-900 dark:text-white ">
           building overView
         </h3>
         <img src={design} alt="design" className="w-[250px]" />
@@ -66,7 +66,7 @@ const ProjectOverview = () => {
                   "linear-gradient(-8deg,#2c241e57 0%,#2c241e57 50%, rgba(255, 0, 0, 0) 50%,rgba(255, 0, 0, 0) 100%)",
               }}
             ></div>
-            <div className="w-full bg-[#2c241e57] p-3 flex py-7 flex-col justify-center items-center gap-1">
+            <div className="w-full bg-[#2c241e57] dark:bg-gray-900 dark:text-white p-3 flex py-7 flex-col justify-center items-center gap-1">
               <span className="text-6xl font-bold text-white">
                 {visible ? <CountUp end={item.end} duration={1} /> : 0}
               </span>
@@ -76,7 +76,7 @@ const ProjectOverview = () => {
         ))}
       </div>
 
-      <h1 className="md:text-[12vw] text-[100px] transform rotate-90 sm:rotate-0  md:pt-40 lg:pt-0 absolute font-bold uppercase text-[#ffe0ce]">
+      <h1 className="md:text-[12vw] text-[100px] transform rotate-90 sm:rotate-0  md:pt-40 lg:pt-0 absolute font-bold uppercase text-[#ffe0ce] dark:bg-gray-900 dark:text-gray-900">
         building <br />
         <span className="ml-0 sm:ml-[100px]">Overview</span>
       </h1>

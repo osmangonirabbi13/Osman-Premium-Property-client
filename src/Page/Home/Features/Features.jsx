@@ -28,13 +28,13 @@ export default function Features() {
   ];
 
   return (
-    <div className="w-full pt-10 bg-[#ffefe5]">
+    <div className="w-full pt-10 bg-[#ffefe5] dark:bg-gray-900 dark:text-white">
       <div className="mx-auto grid grid-cols-1 relative lg:grid-cols-2 gap-5 md:gap-0">
         <div className="w-full order-2 lg:order-none">
           <img src={image} className="w-full" alt="" />
         </div>
         <div className="py-10 px-3 mb-5 w-full gap-1  lg:order-none">
-          <h3 className=" uppercase text-4xl font-bold  text-[#2c241e]">
+          <h3 className=" uppercase text-4xl font-bold  text-[#2c241e] dark:bg-gray-900 dark:text-white">
             Residences
           </h3>
           <img src={design} alt="" className="w-[220px] " />
@@ -52,12 +52,12 @@ export default function Features() {
               delay: 2500,
               disableOnInteraction: false,
             }}
-            speed={800} // Adjust speed for smoother transitions
-            loop={true} // Enable loop for continuous scrolling
-            grabCursor={true} // Show grab cursor when slides are draggable
+            speed={800}
+            loop={true}
+            grabCursor={true}
             modules={[Autoplay]}
-            className="mySwiper bg-[#b6a99c] w-full h-full transition-opacity"
-            style={{ transitionDuration: "0.8s" }} // Add custom CSS transition for opacity
+            className="mySwiper bg-[#b6a99c] dark:bg-gray-900 dark:text-white w-full h-full transition-opacity"
+            style={{ transitionDuration: "0.8s" }}
           >
             {featureData.map((item, idx) => {
               return (

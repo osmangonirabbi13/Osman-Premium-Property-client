@@ -11,10 +11,10 @@ export default function WelcomeHome() {
   const [whatch, setWhatch] = useState(false);
 
   return (
-    <div className="bg-[#2c241e] relative w-full ">
+    <div className="bg-[#2c241e] relative w-full dark:bg-gray-900 dark:text-white">
       {/* -----------social icon div---------------- */}
       <div className="w-full h-[80px] z-40 customIndex static sm:absolute -top-[80px] grid sm:flex-row-reverse sm:grid-cols-2 md:grid-cols-3 grid-cols-1">
-        <div className="w-full col-span-1 md:col-span-2 flex justify-center bg-slate-400 sm:bg-transparent sm:justify-end items-center gap-3 sm:gap-10 h-full">
+        <div className="w-full col-span-1 md:col-span-2 flex justify-center bg-slate-400 dark:bg-gray-900 dark:text-white sm:bg-transparent sm:justify-end items-center gap-3 sm:gap-10 h-full">
           <Link
             to="https://web.facebook.com/"
             className="text-white mr-3 sm:mr-10 iconFamily"
@@ -40,7 +40,7 @@ export default function WelcomeHome() {
             </li>
           </Link>
         </div>
-        <div className="w-full h-full flex gap-3 sm:gap-10 justify-center sm:justify-start items-center bg-[#c78960]">
+        <div className="w-full h-full flex gap-3 sm:gap-10 justify-center sm:justify-start items-center bg-[#c78960] ">
           <button
             onClick={() => setWhatch(!whatch)}
             className="flex gap-3 justify-center items-center ml-3 sm:ml-10 text-white hover:text-black"
@@ -81,7 +81,7 @@ export default function WelcomeHome() {
         </div>
       </div>
       {/* ----------------Section container------------------- */}
-      <div className="w-full flex p-3 sm:p-5 md:p-10 justify-center overflow-hidden items-center bg-[#2c241e] relative min-h-screen">
+      <div className="w-full flex p-3 sm:p-5 md:p-10 justify-center overflow-hidden items-center bg-[#2c241e] dark:bg-gray-900 dark:text-white relative min-h-screen">
         <div className="w-full md:min-w-[66%] h-full absolute top-0">
           <img
             src={bgimg}

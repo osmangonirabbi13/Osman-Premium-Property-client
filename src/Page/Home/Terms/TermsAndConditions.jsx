@@ -1,7 +1,7 @@
 import React from "react";
 const TermsAndConditions = () => {
   return (
-    <div>
+    <div className="dark:bg-gray-900 dark:text-white">
       {" "}
       <div className="max-w-4xl mx-auto pt-30">
         {" "}

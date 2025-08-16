@@ -12,7 +12,7 @@ const HomeCard = () => {
   const apartments = data?.data || [];
 
   return (
-    <div className="p-4 bg-[#FFEDE9]">
+    <div className="p-4 bg-[#FFEDE9] dark:bg-gray-900 dark:text-white">
       <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold mb-6 text-center pt-4">
         Find Your Perfect Home
       </h1>
@@ -24,7 +24,7 @@ const HomeCard = () => {
         {apartments.map((apartment) => (
           <div
             key={apartment._id}
-            className="border border-[#E5E7EB]  p-4 rounded shadow hover:shadow-lg transition flex flex-col h-full"
+            className="border border-[#E5E7EB] dark:border-gray-700 p-4 rounded shadow hover:shadow-lg transition flex flex-col h-full"
           >
             <img
               src={apartment.thumbnail}
