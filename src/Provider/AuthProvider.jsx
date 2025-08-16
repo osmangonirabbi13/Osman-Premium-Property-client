@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import auth from "../Firebase/Firebase.config";
 import {
@@ -11,21 +11,56 @@ import {
   updatePassword,
   updateProfile,
 } from "firebase/auth";
+
 const googleProvider = new GoogleAuthProvider();
+
+// Theme Context
+export const ThemeContext = createContext({
+  darkMode: true,
+  toggleDarkMode: () => {},
+});
+
+export const useTheme = () => useContext(ThemeContext);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // dark mode state
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem("darkMode");
+    return stored === "true"; // default true হলে dark
+  });
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => {
+      const newMode = !prev;
+      localStorage.setItem("darkMode", newMode);
+      return newMode;
+    });
+  };
+
+  // যখন darkMode change হবে তখন body-তে class add/remove করবে
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
   // user create
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
   // user Sign
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   // user Update Profile
   const updateUserProfile = (profileInfo) => {
     return updateProfile(auth.currentUser, profileInfo);
@@ -53,6 +88,7 @@ const AuthProvider = ({ children }) => {
     });
     return () => unSubscribe();
   }, []);
+
   const authInfo = {
     loading,
     createUser,
@@ -63,7 +99,12 @@ const AuthProvider = ({ children }) => {
     user,
     signInWithGoogle,
   };
-  return <AuthContext value={authInfo}>{children}</AuthContext>;
+
+  return (
+    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+      <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    </ThemeContext.Provider>
+  );
 };
 
 export default AuthProvider;
