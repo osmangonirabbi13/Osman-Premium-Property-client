@@ -26,8 +26,8 @@ const About = () => {
         <DesignQuote></DesignQuote>
         <Exparieance></Exparieance>
         <FeatureCard></FeatureCard>
-        <div className="w-full">
-          <div className="container mx-auto my-10">
+        <div className="w-full py-10 dark:bg-gray-900 dark:text-white">
+          <div className="container mx-auto ">
             <img src={image} className="w-full" alt="" />
           </div>
         </div>

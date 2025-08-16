@@ -3,7 +3,7 @@ import Exparieanceimg from "../../../assets/About/exp.jpg";
 
 const Exparieance = () => {
   return (
-    <div className="w-full pb-10">
+    <div className="w-full pb-10 dark:bg-gray-900 dark:text-white">
       <div className="container mx-auto grid grid-cols-1 relative md:grid-cols-2 gap-5 md:gap-0">
         <div className="w-full p-5">
           <div className="flex mb-5 flex-col w-[220px] gap-1">

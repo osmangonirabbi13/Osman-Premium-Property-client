@@ -3,7 +3,7 @@ import { BiTargetLock } from "react-icons/bi";
 
 const AboutText = () => {
   return (
-    <div className="container mx-auto py-10 px-2">
+    <div className=" mx-auto py-10 px-2 dark:bg-gray-900 dark:text-white">
       <h3 className="text-center text-xl my-5 font-bold">
         Experience Luxury Living: Our Story
       </h3>

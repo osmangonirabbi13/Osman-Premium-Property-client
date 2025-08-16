@@ -3,7 +3,7 @@ import design from "../../../assets/WelcomeHome-Img/design1.png";
 const Team = () => {
   return (
     <div>
-      <div className="w-full flex flex-col justify-center items-center py-10">
+      <div className="w-full flex flex-col justify-center items-center py-10 dark:bg-gray-900 dark:text-white">
         <div className="flex mb-5 flex-col max-w-[350px] gap-1">
           <h3 className="text-center uppercase text-xl text-[#c78960]">
             Our Team

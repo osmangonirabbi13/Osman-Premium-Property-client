@@ -23,7 +23,7 @@ const FeatureCard = () => {
   ];
 
   return (
-    <div className="flex py-10 mb-10 container mx-auto flex-wrap justify-around">
+    <div className="flex py-10  mx-auto flex-wrap justify-around dark:bg-gray-900 dark:text-white">
       {features.map((feature, index) => (
         <div
           key={index}

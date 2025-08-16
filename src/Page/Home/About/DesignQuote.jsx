@@ -2,7 +2,7 @@ import img1 from "../../../assets/WelcomeHome-Img/image2.jpg";
 
 const DesignQuote = () => {
   return (
-    <div className="container my-10 mx-auto py-10 px-2 grid grid-cols-1 sm:grid-cols-2">
+    <div className=" py-10 px-2 lg:px-20 grid grid-cols-1 sm:grid-cols-2 dark:bg-gray-900 dark:text-white">
       <div className="w-full flex justify-center items-center">
         <div className="relative">
           <img src={img1} className="w-[250px] z-10 h-[250px]" alt="" />
