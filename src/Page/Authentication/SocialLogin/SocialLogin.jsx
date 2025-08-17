@@ -18,7 +18,7 @@ const SocialLogin = () => {
         const userInfo = {
           displayName: user.name,
           email: user.email,
-          role: "user", // default role
+          role: "user",
           created_at: new Date().toISOString(),
           last_log_in: new Date().toISOString(),
         };
